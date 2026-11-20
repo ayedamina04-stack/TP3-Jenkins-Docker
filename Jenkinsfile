@@ -42,7 +42,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
-                    bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USER% --password-stdin'
+                    bat 'powershell -NoProfile -Command "$env:DOCKER_PASSWORD | docker login -u $env:DOCKER_USER --password-stdin"'
                     bat 'docker push %DOCKER_IMAGE%:build-%BUILD_NUMBER%'
                     bat 'docker push %DOCKER_IMAGE%:latest'
                     bat 'docker logout'
